@@ -1,7 +1,10 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
-import * as cdk from '@aws-cdk/core';
-import { AwsResourceTrackerStack } from '../lib/aws-resource-tracker-stack';
+import "source-map-support/register";
+import * as cdk from "@aws-cdk/core";
+import { Stack } from "../lib/aws-resource-tracker-stack";
 
 const app = new cdk.App();
-new AwsResourceTrackerStack(app, 'AwsResourceTrackerStack');
+new Stack(app, "AwsResourceTrackerStack", {
+  snsTopicARN: process.env["TRACKER_SNS_TOPIC"]!,
+  s3BucketName: process.env["TRACKER_BUCKET_NAME"]!,
+});
